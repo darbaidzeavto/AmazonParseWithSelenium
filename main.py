@@ -58,8 +58,8 @@ while True:
                 driver.get(product_url)
                 time.sleep(3)  # Wait for the page to load all elements
                 data = ProductPageObj.extractDetails(data)
-            NavigatePagesObj.goPreviousPage()
-            time.sleep(3)
+                NavigatePagesObj.goPreviousPage()
+                time.sleep(3)
             i = i + 1
         driver.close()
         SaveToCSVObj.SaveToCSV(FileName, data)
