@@ -5,8 +5,9 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 import random
 from HomePage import HomePage
 from SearchResultPage import SearchResultPage
-from ProductAndResult import ProductPage, SaveToCSV
+from ProductAndResult import ProductPage
 from NavigateBetweenPages import NavigateBetweenPages
+from CsvFileManager import CsvFileManager
 # List of Proxy servers
 ProxyServerList = ["172.67.70.187:80", "172.67.70.187:80", "192.168.105.127:3128"]
 while True:
@@ -23,7 +24,7 @@ while True:
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument(f"--proxy-server={ProxyAddress}")
     # Initialize the WebDriver with Chrome options
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options) 
     try:
         # Give the CSV file a unique name          
         CurrentDate = datetime.now().strftime("%Y%m%d")
@@ -33,7 +34,7 @@ while True:
         SearchResultPageObj = SearchResultPage(driver)
         ProductPageObj = ProductPage(driver)
         NavigatePagesObj = NavigateBetweenPages(driver)
-        SaveToCSVObj = SaveToCSV(driver)
+        CsvFileManagerObj = CsvFileManager(driver)
         # Navigate and collecting data on the first page 
         HomePageObj.openAmazon()
         HomePageObj.avoidCaptcha()
@@ -62,7 +63,7 @@ while True:
                 time.sleep(3)
             i = i + 1
         driver.close()
-        SaveToCSVObj.SaveToCSV(FileName, data)
+        CsvFileManager.SaveToCSV(FileName, data)
     except:
         driver.close()
         print ('something unexpected was happend please try again')
